@@ -6,21 +6,18 @@
 //
 
 struct CheckDivisibility{
-    func checkNumber( _ number:Int)->String{
-        if ( number % 3 == 0 && number % 5 == 0){
-            return "FizzBuzz"
-        }
-        else if (number % 3 == 0 ){
-            return "Fizz"
-        }
-        
-        else if ( number % 5 == 0){
-            return "Buzz"
-        }
-        
-        else{
-            return String(number)
-        }
+        func checkNumber(_ number: Int) -> String {
+            
+            switch (number % 3 == 0, number % 5 == 0) {
+            case (true, true): 
+                return "FizzBuzz"
+            case (true, false): 
+                return "Fizz"
+            case (false, true): 
+                return "Buzz"
+            default: return "\(number)"
+            }
+
     }
 }
 

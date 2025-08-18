@@ -2,7 +2,7 @@
 //  HackerNewsTests.swift
 //  HackerNewsTests
 //
-//  Created by Varshitha Kesa on 8/13/25.
+//  Created by Sai Avinash Vagicherla on 8/13/25.
 //
 
 import XCTest
@@ -13,18 +13,25 @@ final class HackerNewsTests: XCTestCase {
     var numberCheckDivisibility:CheckDivisibility!
     var checkPrime:PrimeCheck!
     var checkReverseString:ReverseString!
+    var objLoginViewController:LoginViewController!
+    var objCreateAccountViewController:CreateAccountViewController!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         objectCalculator=Calculator()
         numberCheckDivisibility=CheckDivisibility()
         checkPrime=PrimeCheck()
         checkReverseString=ReverseString()
+        objLoginViewController=LoginViewController()
+        objCreateAccountViewController=CreateAccountViewController()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        objectCalculator=nil
-
+        objectCalculator = nil
+        numberCheckDivisibility = nil
+        checkPrime = nil
+        checkReverseString = nil
+        objLoginViewController = nil
+        objCreateAccountViewController = nil
     }
 
     func testSum(){
@@ -53,6 +60,7 @@ final class HackerNewsTests: XCTestCase {
         let subValue3=objectCalculator?.sub(nil, nil)
         XCTAssertEqual(subValue3,0)
     }
+    
     func testMul(){
         let mulValue=objectCalculator?.mul(10, 20)
         XCTAssertEqual(mulValue,200)
@@ -66,6 +74,7 @@ final class HackerNewsTests: XCTestCase {
         let mulValue3=objectCalculator?.mul(nil, nil)
         XCTAssertEqual(mulValue3,0)
     }
+    
     func testDiv(){
         let divValue=objectCalculator?.div(10, 20)
         XCTAssertEqual(divValue,0.5)
@@ -97,7 +106,7 @@ final class HackerNewsTests: XCTestCase {
         XCTAssertEqual(value4,"77")
     }
     
-    func testprimeNumber(){
+    func testPrimeNumber(){
         let value1=checkPrime?.primeNumber(7)
         XCTAssertEqual(value1,"Prime")
         
@@ -118,5 +127,85 @@ final class HackerNewsTests: XCTestCase {
         let output2=checkReverseString?.reverse("")
         XCTAssertEqual(output2,"")
     }
-}
-
+    
+    func testValidateEmail(){
+        let output1 = objLoginViewController?.validateEmail("avi@gmail.com")
+        XCTAssertEqual(output1,true)
+        
+        let output2 = objLoginViewController?.validateEmail("klslk@gmal.com")
+        XCTAssertEqual(output2,false)
+        
+        let output3 = objLoginViewController?.validateEmail("kfds")
+        XCTAssertEqual(output3,false)
+        
+        let output4 = objLoginViewController?.validateEmail(nil)
+        XCTAssertEqual(output4,false)
+    }
+    
+    func testValidPassword(){
+        let output1 = objLoginViewController?.validatePassword("@vidlsid123")
+        XCTAssertEqual(output1,true)
+        
+        let output2 = objLoginViewController?.validatePassword("@isnd")
+        XCTAssertEqual(output2,false)
+        
+        let output3 = objLoginViewController?.validatePassword(nil)
+        XCTAssertEqual(output3,false)
+    }
+    
+    func testValidateFirstName(){
+        let output1 = objCreateAccountViewController?.validateFirstName("vagicheefwfe")
+        XCTAssertEqual(output1,true)
+        
+        let output2 = objCreateAccountViewController?.validateFirstName("")
+        XCTAssertEqual(output2,false)
+        
+        let output3 = objCreateAccountViewController?.validateFirstName(nil)
+        XCTAssertEqual(output3,false)
+    }
+    
+    func testValidateLastName(){
+        let output1 = objCreateAccountViewController?.validateLastName("vagicherla")
+        XCTAssertEqual(output1,true)
+        
+        let output2 = objCreateAccountViewController?.validateLastName("")
+        XCTAssertEqual(output2,false)
+        
+        let output3 = objCreateAccountViewController?.validateLastName(nil)
+        XCTAssertEqual(output3,false)
+    }
+    
+    func testValidateGmail(){
+        let output1 = objCreateAccountViewController?.validateGmail("vagicherla@gmail.com")
+        XCTAssertEqual(output1,true)
+        
+        let output2 = objCreateAccountViewController?.validateGmail("vagicherla@gm.com")
+        XCTAssertEqual(output2,false)
+        
+        let output3 = objCreateAccountViewController?.validateGmail(nil)
+        XCTAssertEqual(output3,false)
+        
+        let output4 = objCreateAccountViewController?.validateGmail("saigmail.com")
+        XCTAssertEqual(output4,false)
+    }
+    
+    func testValidateAndConfirmPassword(){
+        let output1 = objCreateAccountViewController?.validateAndConfirmPassword("@Gmailcom44","@Gmailcom44")
+        XCTAssertEqual(output1,true)
+        
+        let output2 = objCreateAccountViewController?.validateAndConfirmPassword("skdl@99","skdl@99")
+        XCTAssertEqual(output2,false)
+        
+        let output3 = objCreateAccountViewController?.validateAndConfirmPassword("LKLL434%","LKLL434%")
+        XCTAssertEqual(output3,false)
+        
+        let output4 = objCreateAccountViewController?.validateAndConfirmPassword("NoDigit!","NoDigit!")
+        XCTAssertEqual(output4,false)
+        
+        let output5 = objCreateAccountViewController?.validateAndConfirmPassword("",nil)
+        XCTAssertEqual(output5,false)
+        
+        let output6 = objCreateAccountViewController?.validateAndConfirmPassword(nil,nil)
+        XCTAssertEqual(output6,false)
+    }
+   }
