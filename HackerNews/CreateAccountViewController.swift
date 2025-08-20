@@ -23,20 +23,14 @@ class CreateAccountViewController: UIViewController {
         guard let fN = fName else {
             return false
         }
-        if (fN.count > 0 ){
-            return true
-        }
-        return false
+        return fN.count > 0
     }
     
     func validateLastName(_ lName: String? ) -> Bool {
         guard let lName = lName else {
             return false
         }
-        if (lName.count > 0 ){
-            return true
-        }
-        return false
+        return lName.count > 0
     }
     
     func validateGmail(_ email: String? ) -> Bool {
@@ -60,7 +54,7 @@ class CreateAccountViewController: UIViewController {
         return false
     }
     
-    @IBAction func singUp(_ sender: Any) {
+    @IBAction func signUp(_ sender: Any) {
         if (validateFirstName(firstName.text) && validateLastName(lastName.text) && firstName.text != lastName.text && validateGmail(email.text)) && validateAndConfirmPassword(password.text,confirmPassword.text) {
             print("Hurray! Your account is created successfully")
         }
